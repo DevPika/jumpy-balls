@@ -157,7 +157,7 @@ function initGame() {
     .registerSystem(GLTFLoaderSystem)
     .registerSystem(GeometrySystem);
 
-  let data = initialize(world, { vr: true });
+  let data = initialize(world, { vr: true, ar: true });
 
   var scene = data.entities.scene.getObject3D();
   window.entityScene = data.entities.scene;
