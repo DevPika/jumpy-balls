@@ -1,6 +1,6 @@
 import { System } from "ecsy";
 import { levels } from "../levels.js";
-import { Text } from "ecsy-three";
+// import { Text } from "ecsy-three";
 import * as THREE from "three";
 import {
   BallGenerator,
@@ -17,7 +17,8 @@ import {
   Level,
   Ball,
   FloorCollided,
-  GameState
+  GameState,
+  Text
 } from "../Components/components.js";
 import { LevelManager, PhysicsSystem } from "../Systems/systems.mjs";
 
@@ -35,7 +36,7 @@ export class GameStateSystem extends System {
     this.setVisibilityByName("startbutton", true);
     this.setVisibilityByName("finished", true);
     this.setVisibilityByName("playingGroup", false);
-    this.world.getSystem(LevelManager).clearCurrentLevel();
+    this.world.systemManager.getSystem(LevelManager).clearCurrentLevel();
     this.world.entityManager
       .getEntityByName("singleton")
       .getMutableComponent(Level).value = 1;
@@ -97,7 +98,7 @@ export class GameStateSystem extends System {
       }
       panel.scale.set(1, 1, 1);
     }
-    this.world.getSystem(PhysicsSystem).play();
+    this.world.systemManager.getSystem(PhysicsSystem).play();
   }
 
   updateTexts(gameState) {
@@ -111,7 +112,7 @@ export class GameStateSystem extends System {
   }
 
   stopGame() {
-    //  this.world.getSystem(PhysicsSystem).stop();
+    //  this.world.systemManager.getSystem(PhysicsSystem).stop();
     this.queries.gameState.results[0].getMutableComponent(
       GameState
     ).playing = false;

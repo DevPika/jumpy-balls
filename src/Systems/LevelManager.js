@@ -1,6 +1,6 @@
 import { System } from "ecsy";
 import * as THREE from "three";
-import { Text, Position } from "ecsy-three";
+// import { Text, Position } from "ecsy-three";
 import {
   Level,
   Target,
@@ -15,7 +15,9 @@ import {
   Parent,
   Animation,
   LevelItem,
-  Element
+  Element,
+  Text,
+  Position
 } from "../Components/components.js";
 import { levels } from "../levels.js";
 import * as Materials from "../materials.js";

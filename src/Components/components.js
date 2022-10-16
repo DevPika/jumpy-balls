@@ -1,8 +1,12 @@
 import * as THREE from "three";
-import { Component, TagComponent } from "ecsy";
-import { Types, ThreeTypes } from "ecsy-three";
+// import { Component, TagComponent, Types } from "ecsy";
+import { Component, TagComponent, Types } from "ecsy";
+import { ThreeTypes } from "ecsy-three";
+console.log(Types);
 
+export * from "ecsy";
 export * from "ecsy-three";
+export * from "./extras"
 
 export class LevelItem extends Component {}
 
@@ -24,7 +28,7 @@ export class Rotating extends Component {}
 Rotating.schema = {
   speed: {
     default: new THREE.Vector3(0, 0, 0),
-    type: ThreeTypes.Vector3Type
+    type: ThreeTypes.Vector3
   }
 };
 
@@ -47,20 +51,20 @@ GameState.schema = {
 
 export class BallGenerator extends Component {}
 BallGenerator.schema = {
-  position: { default: new THREE.Vector3(), type: ThreeTypes.Vector3Type },
-  linearVelocity: { default: new THREE.Vector3(), type: ThreeTypes.Vector3Type }
+  position: { default: new THREE.Vector3(), type: ThreeTypes.Vector3 },
+  linearVelocity: { default: new THREE.Vector3(), type: ThreeTypes.Vector3 }
 };
 
 export class Ball extends Component {}
 Ball.schema = {
   radius: { default: 0.4, type: Types.Number },
-  position: { default: new THREE.Vector3(), type: ThreeTypes.Vector3Type },
-  linearVelocity: { default: new THREE.Vector3(), type: ThreeTypes.Vector3Type }
+  position: { default: new THREE.Vector3(), type: ThreeTypes.Vector3 },
+  linearVelocity: { default: new THREE.Vector3(), type: ThreeTypes.Vector3 }
 };
 
 export class Target extends Component {}
 Target.schema = {
-  position: { default: new THREE.Vector3(), type: ThreeTypes.Vector3Type }
+  position: { default: new THREE.Vector3(), type: ThreeTypes.Vector3 }
 };
 
 export class UI extends TagComponent {}
@@ -68,7 +72,7 @@ export class UI extends TagComponent {}
 export class Button extends Component {}
 Button.schema = {
   text: { default: "", type: Types.String },
-  onClick: { default: null, type: Types.Object }
+  onClick: { default: null, type: Types.Ref }
 };
 
 export class RaycastReceiver extends Component {}
@@ -76,12 +80,12 @@ RaycastReceiver.schema = {
   hovering: { default: false, type: Types.Boolean },
   selecting: { default: false, type: Types.Boolean },
 
-  onHover: { default: null, type: Types.Object },
-  onEnter: { default: null, type: Types.Object },
-  onLeave: { default: null, type: Types.Object },
-  onSelectStart: { default: null, type: Types.Object },
-  onSelect: { default: null, type: Types.Object },
-  onSelectEnd: { default: null, type: Types.Object },
+  onHover: { default: null, type: Types.Ref },
+  onEnter: { default: null, type: Types.Ref },
+  onLeave: { default: null, type: Types.Ref },
+  onSelectStart: { default: null, type: Types.Ref },
+  onSelect: { default: null, type: Types.Ref },
+  onSelectEnd: { default: null, type: Types.Ref },
 
   layerMask: { default: 0, type: Types.Number }
 };
@@ -89,9 +93,9 @@ RaycastReceiver.schema = {
 export class Raycaster extends Component {}
 Raycaster.schema = {
   enabled: { default: true, type: Types.Boolean },
-  currentEntity: { default: null, type: Types.Object },
+  currentEntity: { default: null, type: Types.Ref },
   layerMask: { default: 0, type: Types.Number },
-  value: { default: null, type: Types.Object }
+  value: { default: null, type: Types.Ref }
 };
 
 export class Floor extends TagComponent {}

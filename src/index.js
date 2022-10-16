@@ -1,41 +1,60 @@
 /* global Ammo */
 import * as THREE from "three";
 import {
-  GameState,
-  Geometry,
-  Sound,
-  Level,
-  Object3DComponent,
-  Parent,
-  RigidBody,
-  Dissolve,
-  Draggable,
+  Active,
+  Animation,
+  Camera,
+  CameraRig,
   Colliding,
   CollisionStart,
-  ParentObject3D,
   CollisionStop,
-  FloorCollided,
-  Stop,
-  Animation,
-  Floor,
-  Scene,
-  OnObject3DAdded,
-  Position,
-  Shape,
-  LevelItem,
-  Target,
-  Play,
-  Ball,
-  Element,
-  RaycastReceiver,
-  BallGenerator,
+  Draggable,
+  Dragging,
+  Geometry,
   GLTFLoader,
+  GLTFModel,
+  InputState,
+  Parent,
+  ParentObject3D,
+  Play,
+  Position,
+  RenderPass,
+  RigidBody,
+  Rotation,
+  Scale,
+  Scene,
+  Shape,
+  SkyBox,
+  Sound,
+  Stop,
+  Text,
   Transform,
   Visible,
+  VRController, VRControllerBasicBehaviour,
+  WebGLRenderer,
+  ControllerConnected,
+  OnObject3DAdded,
+  UpdateAspectOnResizeTag,
+
+  LevelItem,
+  Level,
+  FloorCollided,
+  Cleared,
+  Element,
+  Rotating,
+  Dissolve,
+  GameState,
+  BallGenerator,
+  Ball,
+  Target,
   UI,
   Button,
-  WebGLRendererContext
+  RaycastReceiver,
+  Raycaster,
+  Floor
 } from "./Components/components.js";
+import { ThreeTypes } from "ecsy-three";
+
 
 import * as Materials from "./materials.js";
 
@@ -66,7 +85,7 @@ import {
 } from "./Systems/systems.mjs";
 
 import {
-  GeometrySystem,
+    GeometrySystem,
   GLTFLoaderSystem,
   VRControllerSystem,
   VisibilitySystem,
@@ -74,7 +93,10 @@ import {
   AnimationSystem,
   SoundSystem,
   InputSystem,
-  Text,
+  WebGLRendererContext
+} from "./Systems/extras";
+
+import {
   ECSYThreeWorld,
   initialize
 } from "ecsy-three";
@@ -101,40 +123,92 @@ function initGame() {
   detectWebXR();
 
   world = new ECSYThreeWorld();
-
+  console.log(ThreeTypes);
   world
-    .registerComponent(BallGenerator)
-    .registerComponent(GameState)
-    .registerComponent(Geometry)
-    .registerComponent(FloorCollided)
-    .registerComponent(Dissolve)
-    .registerComponent(Sound)
-    .registerComponent(Level)
-    .registerComponent(LevelItem)
+    .registerComponent(Active)
+    .registerComponent(Animation)
+    .registerComponent(Camera)
+    .registerComponent(CameraRig)
     .registerComponent(Colliding)
     .registerComponent(CollisionStart)
     .registerComponent(CollisionStop)
-    .registerComponent(Ball)
-    .registerComponent(Stop)
-    .registerComponent(Play)
-    .registerComponent(Text)
-    .registerComponent(RaycastReceiver)
-    .registerComponent(Target)
-    .registerComponent(Element)
-    .registerComponent(ParentObject3D)
-    .registerComponent(RigidBody)
-    .registerComponent(Animation)
-    .registerComponent(Floor)
-    .registerComponent(Position)
-    .registerComponent(Shape)
     .registerComponent(Draggable)
+    .registerComponent(Dragging)
+    .registerComponent(Geometry)
     .registerComponent(GLTFLoader)
+    .registerComponent(GLTFModel)
+    .registerComponent(InputState)
+    .registerComponent(Parent)
+    .registerComponent(ParentObject3D)
+    .registerComponent(Play)
+    .registerComponent(Position)
+    .registerComponent(RenderPass)
+    .registerComponent(RigidBody)
+    .registerComponent(Rotation)
+    .registerComponent(Scale)
+    .registerComponent(Scene)
+    .registerComponent(Shape)
+    .registerComponent(SkyBox)
+    .registerComponent(Sound)
+    .registerComponent(Stop)
+    .registerComponent(Text)
     .registerComponent(Transform)
     .registerComponent(Visible)
-    .registerComponent(UI)
-    .registerComponent(Button);
+    .registerComponent(VRController, VRControllerBasicBehaviour)
+    .registerComponent(WebGLRenderer)
+    .registerComponent(ControllerConnected)
+    .registerComponent(OnObject3DAdded)
+    .registerComponent(UpdateAspectOnResizeTag)
 
-  world
+    .registerComponent(LevelItem)
+    .registerComponent(Level)
+    .registerComponent(FloorCollided)
+    .registerComponent(Cleared)
+    .registerComponent(Element)
+    .registerComponent(Rotating)
+    .registerComponent(Dissolve)
+    .registerComponent(GameState)
+    .registerComponent(BallGenerator)
+    .registerComponent(Ball)
+    .registerComponent(Target)
+    .registerComponent(UI)
+    .registerComponent(Button)
+    .registerComponent(RaycastReceiver)
+    .registerComponent(Raycaster)
+    .registerComponent(Floor)
+
+    // .registerComponent(BallGenerator)
+    // .registerComponent(GameState)
+    // .registerComponent(Geometry)
+    // .registerComponent(FloorCollided)
+    // .registerComponent(Dissolve)
+    // .registerComponent(Sound)
+    // .registerComponent(Level)
+    // .registerComponent(LevelItem)
+    // .registerComponent(Colliding)
+    // .registerComponent(CollisionStart)
+    // .registerComponent(CollisionStop)
+    // .registerComponent(Ball)
+    // .registerComponent(Stop)
+    // .registerComponent(Play)
+    // .registerComponent(Text)
+    // .registerComponent(RaycastReceiver)
+    // .registerComponent(Target)
+    // .registerComponent(Element)
+    // .registerComponent(ParentObject3D)
+    // .registerComponent(RigidBody)
+    // .registerComponent(Animation)
+    // .registerComponent(Floor)
+    // .registerComponent(Position)
+    // .registerComponent(Shape)
+    // .registerComponent(Draggable)
+    // .registerComponent(GLTFLoader)
+    // .registerComponent(Transform)
+    // .registerComponent(Visible)
+    // .registerComponent(UI)
+    // .registerComponent(Button);
+  try {
+    world
     .registerSystem(InputSystem)
     .registerSystem(GameStateSystem)
     .registerSystem(LevelManager)
@@ -156,25 +230,30 @@ function initGame() {
     .registerSystem(OutputSystem)
     .registerSystem(GLTFLoaderSystem)
     .registerSystem(GeometrySystem);
+  } catch (error) {
+    console.log("error")
+  }
+  
 
   let data = initialize(world, { vr: true });
+  console.log(data);
 
-  var scene = data.entities.scene.getObject3D();
-  window.entityScene = data.entities.scene;
+  var scene = data.sceneEntity.getObject3D();
+  window.entityScene = data.sceneEntity;
 
   let level = urlParams.has("level") ? parseInt(urlParams.get("level")) : 0;
 
   // Singleton entity
   world
     .createEntity("singleton")
-    .addComponent(Scene, { value: data.entities.scene })
+    .addComponent(Scene, { value: data.sceneEntity })
     .addComponent(GameState, {
       levelStartTime: performance.now(),
       gameStartTime: performance.now()
     })
     .addComponent(Level, { value: level });
 
-  world.getSystem(PhysicsSystem).stop();
+  world.systemManager.getSystem(PhysicsSystem).stop();
 
   init(data);
 
@@ -225,26 +304,26 @@ function initGame() {
           //startButton.removeComponent(Button);
           mediaElement.play();
 
-          world.getSystem(GameStateSystem).playGame();
+          world.systemManager.getSystem(GameStateSystem).playGame();
           setTimeout(() => {
             startButton.addComponent(Visible, { value: false });
           }, 300);
           //this.world.entityManager.getEntityByName("singleton").getMutableComponent(GameState).playing = true;
         }
       })
-      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(Parent, { value: data.sceneEntity })
       .addComponent(Position, { value: new Vector3(0, 0.6, -1.5) })
       .addComponent(Sound, { url: "assets/sounds/click.ogg" })
       .addComponent(Visible, { value: !urlParams.has("autostart") });
 
     if (urlParams.has("autostart")) {
-      world.getSystem(GameStateSystem).playGame();
+      world.systemManager.getSystem(GameStateSystem).playGame();
     }
 
     // @todo This first one remove
     world.execute(0.016, 0);
 
-    data.entities.renderer.getComponent(
+    data.rendererEntity.getComponent(
       WebGLRendererContext
     ).value.outputEncoding = THREE.sRGBEncoding;
   }
@@ -255,7 +334,7 @@ function initGame() {
     let playingGroup = world
       .createEntity("playingGroup")
       .addComponent(Object3DComponent, { value: new THREE.Group() })
-      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(Parent, { value: data.sceneEntity })
       .addComponent(Visible, { value: urlParams.has("autostart") });
 
     // Scene
@@ -278,7 +357,7 @@ function initGame() {
           //model.getObjectByName('floor').receiveShadow = true;
         }
       })
-      .addComponent(Parent, { value: data.entities.scene });
+      .addComponent(Parent, { value: data.sceneEntity });
 
     world
       .createEntity("help")
@@ -292,7 +371,7 @@ function initGame() {
         }
       })
       .addComponent(Position, { value: new THREE.Vector3(0, 1.6, -2) })
-      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(Parent, { value: data.sceneEntity })
       .addComponent(Visible, { value: true });
 
     const panelLevel = world
@@ -410,7 +489,7 @@ function initGame() {
           //model.children[0].lookAt(data.entities.camera.getObject3D());
         }
       })
-      .addComponent(Parent, { value: data.entities.scene /*playingGroup*/ })
+      .addComponent(Parent, { value: data.sceneEntity /*playingGroup*/ })
       .addComponent(Animation, { duration: 2.35 })
       .addComponent(Position, { value: new Vector3(0, 2, -6) })
       .addComponent(Visible, { value: false });
@@ -445,7 +524,7 @@ function initGame() {
         linearDamping: 0.0,
         angularDamping: 0.0
       })
-      .addComponent(Parent, { value: data.entities.scene });
+      .addComponent(Parent, { value: data.sceneEntity });
   }
 
   function getTextParameters(text, color, size, align) {

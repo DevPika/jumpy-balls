@@ -2,7 +2,7 @@ import { System } from "ecsy";
 import * as THREE from "three";
 import TWEEN from "../vendor/tween.module.min.js";
 
-import { Position, Text } from "ecsy-three";
+// import { Position, Text } from "ecsy-three";
 import {
   UI,
   Sound,
@@ -10,7 +10,9 @@ import {
   Geometry,
   Button,
   RaycastReceiver,
-  Object3DComponent
+  Object3DComponent,
+  Position,
+  Text
 } from "../Components/components.js";
 
 function setColor(object, color) {

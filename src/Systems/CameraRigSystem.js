@@ -7,9 +7,10 @@ import {
   UpdateAspectOnResizeTag,
   Camera,
   CameraRig,
-  VRController
+  VRController,
+  Position
 } from "../Components/components.js";
-import { Position } from "ecsy-three";
+// import { Position } from "ecsy-three";
 
 export class CameraRigSystem extends System {
   init() {

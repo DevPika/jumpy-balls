@@ -9,9 +9,11 @@ import {
   Object3DComponent,
   Raycaster,
   RaycastReceiver,
-  WebGLRendererContext
 } from "../Components/components.js";
-import { InputSystem } from "ecsy-three";
+import { 
+  WebGLRendererContext,
+  InputSystem
+} from "./extras";
 
 var raycaster = new THREE.Raycaster();
 var tempMatrix = new THREE.Matrix4();
