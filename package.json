@@ -1,59 +1,20 @@
 {
-  "name": "machine",
-  "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "name": "jumpy-balls-vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --mode development --https -d",
-    "http": "webpack-dev-server --host 0.0.0.0 --mode development -d",
-    "build": "webpack --mode production",
-    "lint": "eslint src",
-    "brow": "browserify src/index.js bundle.browserify.js",
-    "deploy": "gh-pages -d dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fernandojsg/machine.git"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "es2015"
-          ]
-        }
-      ]
-    ]
-  },
-  "author": "Fernando Serrano <fernandojsg@gmail.com> (http://fernandojsg.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fernandojsg/machine/issues"
-  },
-  "homepage": "https://github.com/fernandojsg/machine#readme",
-  "dependencies": {
-    "ecsy": "^0.2.6",
-    "ecsy-three": "^0.0.4",
-    "three": "^0.117.1",
-    "webxr-polyfill": "^2.0.1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "babel-preset-es2015": "^6.24.1",
-    "babelify": "^10.0.0",
-    "browserify": "^16.5.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "prettier": "^1.19.1",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0",
-    "webpack-node-externals": "^1.7.2"
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "ecsy": "^0.4.2",
+    "ecsy-three": "^0.1.1",
+    "three": "^0.116.1",
+    "troika-3d-text": "^0.28.1"
   }
 }

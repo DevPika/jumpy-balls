@@ -1,110 +1,56 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Jumpy Balls</title>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77033033-32"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-77033033-32');
-	</script>
-	<meta name="application-name" content="Jumpy Balls"/>
-	<title>Jumpy Balls</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <meta name="monetization" content="$coil.xrptipbot.com/57fa2621-8892-484b-a9cd-24e79bf8e48f "/>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <style>
 
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/apple-touch-icon-120x120.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/apple-touch-icon-152x152.png" />
-  <link rel="icon" type="image/png" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/favicon-16x16.png" sizes="16x16" />
-  <meta name="application-name" content="Jumpy Balls"/>
-  <meta name="msapplication-TileColor" content="#FFFFFF" />
-  <meta name="msapplication-TileImage" content="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/mstile-144x144.png" />
-
-  <!-- Search Engine -->
-  <meta name="description" content="A physics toy game made with ECSY and Threejs">
-  <meta name="image" content="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/screenshot.jpg">
-  <!-- Schema.org for Google -->
-  <meta itemprop="name" content="Jumpy Balls">
-  <meta itemprop="description" content="A physics toy game made with ECSY and Threejs">
-  <meta itemprop="image" content="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/screenshot.jpg">
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Jumpy Balls">
-  <meta name="twitter:description" content="A physics toy game made with ECSY and Threejs https://mixedreality.mozilla.org/jumpy-balls">
-  <meta name="twitter:site" content="@mozillareality">
-  <meta name="twitter:creator" content="@mozillareality">
-  <meta name="twitter:image:src" content="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/screenshot.jpg">
-  <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-  <meta name="og:title" content="Jumpy Balls">
-  <meta name="og:description" content="A physics toy game made with ECSY and Threejs">
-  <meta name="og:image" content="https://mixedreality.mozilla.org/jumpy-balls/assets/favicon/screenshot.jpg">
-  <meta name="og:url" content="https://mixedreality.mozilla.org/jumpy-balls">
-  <meta name="og:site_name" content="Jumpy Balls">
-  <meta name="og:locale" content="en_US">
-  <meta name="og:type" content="website">
-
-	<style>
-
-    @font-face{
-        font-family: 'WetinCaroWant';
-        src: url('assets/fonts/WetinCaroWant.ttf');
-    }
-		body {
-			font-family: 'WetinCaroWant', sans-serif;
-			background-color: #101010;
-			color: #fff;
-			margin: 0px;
-			overflow: hidden;
-		}
-		a {
-			color: #229bca;
-      text-decoration: none;
-      padding: 3px;
-		}
-    a:hover{
-      color: #43c4f7;
-      border-bottom: 2px solid #43c4f7;
-    }
-    #no-webxr {
-      font-size: 18px;
-      margin-top: 3rem;
-      letter-spacing: 1px;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      line-height: 2rem;
-    }
-    #no-webxr div {
-      text-align: center;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 1.2rem 2rem;
-      border-radius: 20px;
-    }
-    .hidden {
-      display: none !important;
-    }
-
-	</style>
-	<script src="src/vendor/ammo.js"></script>
-</head>
-<body>
-
-  <div id="no-webxr" class="hidden">
-    <div>
-      WebXR not available! Please use a VR headset<br>
-      <a href="https://www.youtube.com/watch?v=R4etr-b51GI">(Watch preview video)</a>
-    </div>
-  </div>
-
-<script type="module" src="build/bundle.js"></script>
-</body>
+      @font-face{
+          font-family: 'WetinCaroWant';
+          src: url('assets/fonts/WetinCaroWant.ttf');
+      }
+      body {
+        font-family: 'WetinCaroWant', sans-serif;
+        background-color: #101010;
+        color: #fff;
+        margin: 0px;
+        overflow: hidden;
+      }
+      a {
+        color: #229bca;
+        text-decoration: none;
+        padding: 3px;
+      }
+      a:hover{
+        color: #43c4f7;
+        border-bottom: 2px solid #43c4f7;
+      }
+      #no-webxr {
+        font-size: 18px;
+        margin-top: 3rem;
+        letter-spacing: 1px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        line-height: 2rem;
+      }
+      #no-webxr div {
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 1.2rem 2rem;
+        border-radius: 20px;
+      }
+      .hidden {
+        display: none !important;
+      }
+  
+    </style>
+    <script src="src/vendor/ammo.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/index.js"></script>
+  </body>
 </html>
