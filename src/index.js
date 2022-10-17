@@ -23,6 +23,8 @@ import {
   WebGLRendererContext
 } from "./Components/components.js";
 
+import { ARButton } from "./ARButton.js";
+
 import * as Materials from "./materials.js";
 
 import WebXRPolyfill from "webxr-polyfill";
@@ -200,6 +202,12 @@ function initGame() {
     data.entities.renderer.getComponent(
       WebGLRendererContext
     ).value.outputEncoding = THREE.sRGBEncoding;
+
+    var rendererRef = data.entities.renderer.getComponent(WebGLRendererContext).value;
+    console.log(rendererRef);
+    rendererRef.xr.enabled = true;
+    rendererRef.alpha = true;
+    document.body.appendChild(ARButton.createButton(rendererRef));
   }
 
   function createScene(data) {
@@ -219,7 +227,7 @@ function initGame() {
       .addComponent(Visible, { value: true });
 
     world
-      .createEntity()
+      .createEntity("envSet")
       .addComponent(GLTFLoader, {
         url: "assets/models/set.glb",
         onLoaded: model => {
@@ -231,6 +239,7 @@ function initGame() {
           //model.getObjectByName('floor').receiveShadow = true;
         }
       })
+      .addComponent(Visible, { value: true })
       .addComponent(Parent, { value: data.entities.scene });
 
     world
