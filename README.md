@@ -1,5 +1,8 @@
-# Jumpy Balls - Now with AR passthrough!
-[New version with AR here](https://devpika.github.io/jumpy-balls-xr/)
+# Jumpy Balls XR - Now with AR passthrough!
+
+[Play Jumpy Balls XR here!](https://devpika.github.io/jumpy-balls-xr/)
+
+![webxr passthrough quest 2 game gif](assets/jumpy-balls-xr.gif)
 
 ![screenshot](assets/favicon/screenshot.jpg)
 
