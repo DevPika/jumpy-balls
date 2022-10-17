@@ -56,6 +56,14 @@ export class GameStateSystem extends System {
     panel.scale.set(3, 3, 3);
   }
 
+  enterARSession() {
+    this.setVisibilityByName("envSet", false);
+  }
+
+  exitARSession() {
+    this.setVisibilityByName("envSet", true);
+  }
+
   playGame() {
     let gameState = this.queries.gameState.results[0].getMutableComponent(
       GameState
