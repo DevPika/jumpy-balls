@@ -204,7 +204,6 @@ function initGame() {
     ).value.outputEncoding = THREE.sRGBEncoding;
 
     var rendererRef = data.entities.renderer.getComponent(WebGLRendererContext).value;
-    console.log(rendererRef);
     rendererRef.xr.enabled = true;
     rendererRef.alpha = true;
     document.body.appendChild(ARButton.createButton(rendererRef));

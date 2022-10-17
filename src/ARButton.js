@@ -51,7 +51,7 @@
 			button.style.left = 'calc(50% - 50px)';
 			button.style.width = '100px';
 
-			button.textContent = 'START AR';
+			button.textContent = 'ENTER AR';
 
 			button.onmouseenter = function () {
 
