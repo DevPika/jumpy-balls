@@ -1,4 +1,5 @@
 # Jumpy Balls - Now with AR passthrough!
+[New version with AR here](https://devpika.github.io/jumpy-balls-xr/)
 
 ![screenshot](assets/favicon/screenshot.jpg)
 
@@ -11,6 +12,7 @@ See `package.json` for other scripts.
 
 > NOTE: As the master branch of the main repo from Mozilla did not work right away, getting the project to build successfully was a bit tricky. The latest commit on the main branch uses `ecsy-three@0.0.4` but fails to build successfully (because of breaking changes in the API?). This branch diverges from an older commit that uses a deprecated version (`ecsy-three@0.1.0`). The naming is weird as it has a higher version number despite being older. Compare the npm release history with the `package.json` changes in the repo for a clearer picture.
 
+## Original links from Mozilla
 More info on: https://blog.mozvr.com/jumpy-balls
 
 A little physics game using:
@@ -22,3 +24,9 @@ A little physics game using:
 Give it a try: https://mixedreality.mozilla.org/jumpy-balls/
 
 Read the blog post: https://blog.mozvr.com/jumpy-balls
+
+## Credits
+* [MozillaReality](https://github.com/MozillaReality)
+* [Fernando Serrano](https://github.com/fernandojsg)
+* [Diego F. Goberna](https://github.com/feiss)
+* [Asset credits in its own README](./assets/raw_assets/README.md)
