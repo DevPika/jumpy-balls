@@ -9,7 +9,9 @@ import {
   Object3D,
   Raycaster,
   RaycastReceiver,
-  WebGLRendererContext
+  WebGLRendererContext,
+  Position,
+  Transform
 } from "../Components/components.js";
 import { InputSystem } from "ecsy-three";
 
@@ -32,7 +34,7 @@ function setEmisive(object, color, channel) {
 export class VRControllerInteraction extends System {
   execute() {
     this.queries.dragging.results.forEach(entity => {
-      this.reposition(entity.getComponent(Object3D).value, true);
+      this.reposition(entity, entity.getComponent(Object3D).value, true);
     });
 
     this.queries.objects.added.forEach(entity => {
@@ -115,11 +117,11 @@ export class VRControllerInteraction extends System {
       object.userData.previousParent.add(object);
 
       controller.userData.selected = undefined;
-      this.reposition(object);
+      this.reposition(object.userData.entity, object);
     }
   }
 
-  reposition(object, world) {
+  reposition(entity, object, world) {
     if (!object.userData.body) {
       return;
     }
@@ -148,6 +150,31 @@ export class VRControllerInteraction extends System {
         )
       );
       object.userData.body.setWorldTransform(initialTransform);
+
+      const positionComponent = entity.getComponent(Position);
+      if (positionComponent) {
+        positionComponent.value = {
+          x: position.x,
+          y: position.y,
+          z: position.z
+        };
+      }
+      console.log("Updated pos" + "\t" + entity + "\t" + positionComponent.value);
+      let rotEuler = new THREE.Euler();
+      rotEuler.setFromQuaternion(quaternion);
+      const transformComponent = entity.getComponent(Transform);
+      if (transformComponent) {
+        transformComponent.position = {
+          x: position.x,
+          y: position.y,
+          z: position.z
+        };
+        transformComponent.rotation = {
+          x: rotEuler.x,
+          y: rotEuler.y,
+          z: rotEuler.z
+        };
+      }
     } else {
       const initialTransform = new Ammo.btTransform();
       initialTransform.setIdentity();
@@ -167,6 +194,31 @@ export class VRControllerInteraction extends System {
         )
       );
       object.userData.body.setWorldTransform(initialTransform);
+
+      const positionComponent = entity.getComponent(Position);
+      if (positionComponent) {
+        positionComponent.value = {
+          x: object.position.x,
+          y: object.position.y,
+          z: object.position.z
+        };
+      }
+      console.log("Also Updated pos" + "\t" + entity + "\t" + positionComponent.value);
+      let rotEuler = new THREE.Euler();
+      rotEuler.setFromQuaternion(object.quaternion);
+      const transformComponent = entity.getComponent(Transform);
+      if (transformComponent) {
+        transformComponent.position = {
+          x: object.position.x,
+          y: object.position.y,
+          z: object.position.z
+        };
+        transformComponent.rotation = {
+          x: rotEuler.x,
+          y: rotEuler.y,
+          z: rotEuler.z
+        };
+      }
     }
   }
 

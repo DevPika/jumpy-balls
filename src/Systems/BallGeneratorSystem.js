@@ -9,6 +9,7 @@ import {
   Parent,
   Sound,
   RigidBody,
+  Position,
   Transform,
   BallGenerator
 } from "../Components/components.js";
@@ -25,6 +26,7 @@ export class BallGeneratorSystem extends System {
       }
 
       var ballGeneratorComponent = generator.getComponent(BallGenerator);
+      var generatorPositionComponent = generator.getComponent(Position);
 
       // Ball dispatcher object
       var ball = this.world.createEntity();
@@ -42,7 +44,7 @@ export class BallGeneratorSystem extends System {
           }
         })
         .addComponent(Transform, {
-          position: ballGeneratorComponent.position,
+          position: generatorPositionComponent.value,
           rotation: { x: 0, y: 0, z: 0 }
         })
         .addComponent(Shape, {
@@ -59,7 +61,7 @@ export class BallGeneratorSystem extends System {
         })
         .addComponent(LevelItem)
         .addComponent(Ball, {
-          position: ballGeneratorComponent.position,
+          position: generatorPositionComponent.value,
           radius: RADIUS,
           linearVelocity: ballGeneratorComponent.linearVelocity
         })
@@ -67,6 +69,7 @@ export class BallGeneratorSystem extends System {
         .addComponent(Parent, {
           value: this.world.entityManager.getEntityByName("playingGroup")
         });
+      console.log(generatorPositionComponent.value);
 
       generator.removeComponent(Active);
     });

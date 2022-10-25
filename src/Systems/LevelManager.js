@@ -109,7 +109,7 @@ export class LevelManager extends System {
         .addComponent(Position, {
           value: new THREE.Vector3().copy(g.position)
         })
-        .addComponent(LevelItem)
+        .addComponent(Position, { value: g.position })
         .addComponent(Parent, { value: levelGroup });
 
       if (editMode) {
